@@ -35,7 +35,7 @@ python tools/infer.py \
   --branch temporal
 ```
 
-The [model repository](https://huggingface.co/y352184741/DualTopo) hosts the SubsetA checkpoint once uploaded. Until the file appears there, use the prepared checkpoint supplied by the maintainer. [Weight upload instructions](docs/weights.md) describe the upload and hash verification.
+The [model repository](https://huggingface.co/y352184741/DualTopo) hosts the released [SubsetA checkpoint](https://huggingface.co/y352184741/DualTopo/blob/main/dualtopo_remake_scale025_subset_a.pth). The download tool verifies its SHA-256 against `configs/weights.json`. See [weight details](docs/weights.md) for the export format and provenance.
 
 Use `--branch init` for the paper's **init pathway**. Both pathways use the same checkpoint and shared decoder; the init pathway is an output selection, not a separately trained baseline. Frames remain sequential in both modes. `--limit 2 --workers 0` runs a short prefix for debugging; omit `--limit` for full inference. Do not shuffle frames or split individual frames across independent workers with separate temporal state.
 
