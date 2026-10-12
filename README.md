@@ -6,10 +6,10 @@
 
 <p>
   <a href="https://yimingyang23.github.io/">Yiming Yang</a><sup>1</sup>&emsp;
-  Hongbin Lin<sup>1</sup>&emsp;
-  Yueru Luo<sup>1</sup>&emsp;
-  Suzhong Fu<sup>1</sup>&emsp;
-  Chao Zheng<sup>3</sup><br>
+  <a href="https://scholar.google.com/citations?user=LqX1k5QAAAAJ&amp;hl=zh-CN&amp;oi=ao">Hongbin Lin</a><sup>1</sup>&emsp;
+  <a href="https://scholar.google.com/citations?user=B588EyYAAAAJ&amp;hl=zh-CN&amp;oi=ao">Yueru Luo</a><sup>1</sup>&emsp;
+  <a href="https://scholar.google.com/citations?user=jwPyH6wAAAAJ&amp;hl=zh-CN">Suzhong Fu</a><sup>1</sup>&emsp;
+  <a href="https://scholar.google.com/citations?user=6A1yEFMAAAAJ&amp;hl=zh-CN&amp;oi=ao">Chao Zheng</a><sup>3</sup><br>
   Xinrui Yan<sup>3</sup>&emsp;
   Kun Tang<sup>3</sup>&emsp;
   <a href="https://lvchen.wixsite.com/automan">Chen Lv</a><sup>2</sup>&emsp;
