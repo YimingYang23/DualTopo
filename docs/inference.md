@@ -12,13 +12,7 @@ Call `forward_test`, not `simple_test` directly: the entry handles `can_bus[:3]`
 
 The previous frame's adjacency is aligned with exactly the same ordered Top-K queries. `A[i,j]` represents a directed edge from i to j. Only lane-class nodes are valid; invalid edges and self-edges are excluded from propagation. Successor messages use row-normalized A and predecessor messages use row-normalized Aᵀ, with denominator floor `1e-6`.
 
-The graph fusion residual is confidence-gated and scaled by **0.25**, matching the paper's directed graph propagation definition. Cached query/BEV/adjacency tensors are detached. Scene changes clear the corresponding history. The raw learned adjacency is cached before any output-only postprocessing. No geometric distance score is fed into the memories.
-
-## Checkpoint names
-
-Public module and parameter names follow the manuscript: `query_world_model`, `bev_world_model`, `directed_graph_propagation`, `predecessor_projection`, `successor_projection`, `graph_fusion`. `dualtopo/checkpoint.py` explicitly maps the corresponding legacy Remake names when loading. The exported checkpoint already uses the public names; no tensor values change.
-
-A few unused learned embeddings from the accepted checkpoint are retained in the model layout to preserve strict loading of all 1,023 tensors. They do not introduce a training entry point, denoising procedure or extra inference supervision. Public `forward` performs inference only.
+Cached query/BEV/adjacency tensors are detached. Scene changes clear the corresponding history. The raw learned adjacency is cached before output postprocessing.
 
 ## Prediction contract
 

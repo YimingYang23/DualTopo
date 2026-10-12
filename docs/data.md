@@ -30,14 +30,3 @@ Each frame provides `segment_id`, `timestamp`, `pose.rotation`, `pose.translatio
 
 Scene frames must be contiguous and strictly ordered by timestamp. The loader rejects interleaved scenes or reversed timestamps. It assigns sequential sample indices and resets temporal memory at scene changes.
 
-## Image pipeline
-
-1. Load seven images as float32 BGR.
-2. Crop the front-center image with the same vertical crop as the accepted configuration; update its projection matrix.
-3. Resize all camera images with fixed image scale **0.5**; update calibration.
-4. Convert BGR to RGB and normalize using mean `[123.675, 116.28, 103.53]`, std `[58.395, 57.12, 57.375]`.
-5. Pad the bottom/right of every camera image to the common maximum shape, rounded up to a multiple of 32.
-
-The name **scale025** denotes the **directed graph residual coefficient 0.25**, not the image resize ratio. Images use 0.5. Projection visibility uses each camera's valid resized `img_shape`; sampling normalization uses its actual padded `pad_shape`. Do not replace one with the other.
-
-Prediction formatting keeps the centerline and both boundaries in metric XYZ. It preserves confidence ordering and aligns topology rows/columns with the same lane ordering after pedestrian-crossing entries are removed. This release uses only SubsetA's 3D lane segments, with 90 regression values per candidate.

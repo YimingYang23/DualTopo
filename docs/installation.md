@@ -1,6 +1,6 @@
 # Installation
 
-Use a separate Python environment. The accepted Remake run used **PyTorch 2.6.0 + CUDA 12.4**. The release's CPU compatibility checks also pass with PyTorch 2.10.0 / torchvision 0.25.0. The instructions below pin the original PyTorch/CUDA pair.
+Use a separate Python environment with **PyTorch 2.6.0 + CUDA 12.4**, as shown below.
 
 ```bash
 conda create -n dualtopo python=3.11 -y

@@ -1,6 +1,6 @@
 # Release compatibility validation
 
-This inference-only extraction was compared with the accepted Remake + scale025 implementation, using the final SubsetA checkpoint at epoch 12 / iteration 33516.
+The release was compared with the original implementation, using the final SubsetA checkpoint at epoch 12 / iteration 33516.
 
 - Original checkpoint SHA256: `da89433c07d3e1019d260b554b6febb577fc15b0ce805ebb0350d2d3de98d841`.
 - All 1,023 parameters/buffers survive the public naming conversion with tensor-exact equality and strict loading.
