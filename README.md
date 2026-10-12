@@ -4,6 +4,22 @@
 
 This repository releases inference for the **Remake + directed topology memory, residual scale 0.25** checkpoint on **OpenLane-V2 SubsetA**. It uses PyTorch without MMCV, MMDetection or MMDetection3D. Only inference, installation and data-interface documentation are included.
 
+## Visualizations
+
+Three animated examples show surround-camera views, temporal lane tracks in the current ego frame, and fused topology in the global BEV. The original GIFs are preserved.
+
+**Example 1**
+
+![DualTopo example 1: surround cameras and temporal topology](assets/visualizations/scene_01.gif)
+
+**Example 2**
+
+![DualTopo example 2: surround cameras and temporal topology](assets/visualizations/scene_02.gif)
+
+**Example 3**
+
+![DualTopo example 3: surround cameras and temporal topology](assets/visualizations/scene_03.gif)
+
 ## Quick start
 
 Follow [installation](docs/installation.md) and [SubsetA data preparation](docs/data.md), then:
