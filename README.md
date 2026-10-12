@@ -4,6 +4,31 @@
 
 <h3>Spatio-Temporal Lane Segment Graph Generation with Dual Latent World Models and Parallel Query Supervision</h3>
 
+<p>
+  <a href="https://yimingyang23.github.io/">Yiming Yang</a><sup>1</sup>&emsp;
+  Hongbin Lin<sup>1</sup>&emsp;
+  Yueru Luo<sup>1</sup>&emsp;
+  Suzhong Fu<sup>1</sup>&emsp;
+  Chao Zheng<sup>3</sup><br>
+  Xinrui Yan<sup>3</sup>&emsp;
+  Kun Tang<sup>3</sup>&emsp;
+  <a href="https://lvchen.wixsite.com/automan">Chen Lv</a><sup>2</sup>&emsp;
+  <a href="https://sse.cuhk.edu.cn/en/faculty/cuishuguang">Shuguang Cui</a><sup>1</sup>&emsp;
+  <a href="https://sse.cuhk.edu.cn/faculty/lizhen">Zhen Li</a><sup>1</sup>
+</p>
+
+<p>
+  <sup>1</sup>The Chinese University of Hong Kong, Shenzhen<br>
+  <sup>2</sup>Nanyang Technological University&emsp;
+  <sup>3</sup>Tencent Maps (T Lab)
+</p>
+
+<p>
+  <a href="https://www.cuhk.edu.cn/"><img src="assets/logos/cuhk_shenzhen.png" width="38%" alt="The Chinese University of Hong Kong, Shenzhen"></a>&ensp;
+  <a href="https://www.ntu.edu.sg/"><img src="assets/logos/ntu.png" width="28%" alt="Nanyang Technological University"></a>&ensp;
+  <a href="https://map.qq.com/"><img src="assets/logos/tencent_maps.png" width="24%" alt="Tencent Maps"></a>
+</p>
+
 <h4>
   <a href="https://github.com/YimingYang23/DualTopo"><img src="https://img.shields.io/badge/GitHub-Inference%20Code-181717?logo=github" alt="Inference code"></a>
   <a href="https://huggingface.co/y352184741/DualTopo"><img src="https://img.shields.io/badge/Hugging%20Face-Checkpoint-FFD21E?logo=huggingface" alt="Checkpoint"></a>
@@ -12,8 +37,6 @@
 </h4>
 
 <img src="assets/framework.png" width="100%" alt="Overall framework of DualTopo">
-
-[Framework figure (PDF)](assets/framework.pdf)
 
 </div>
 
@@ -59,6 +82,21 @@ python tools/infer.py \
 ```
 
 Use `--branch init` for the init pathway. Both pathways use the same checkpoint. Keep frames sequential to preserve temporal state. See [inference details](docs/inference.md) and [checkpoint details](docs/weights.md).
+
+## Main Results
+
+Results reported in the paper on OpenLane-V2.
+
+<table>
+  <tr>
+    <th>SubsetA</th>
+    <th>SubsetB</th>
+  </tr>
+  <tr>
+    <td width="50%" align="center" valign="top"><img src="assets/results/subset_a.png" width="100%" alt="OpenLane-V2 SubsetA main results"></td>
+    <td width="50%" align="center" valign="top"><img src="assets/results/subset_b.png" width="100%" alt="OpenLane-V2 SubsetB main results"></td>
+  </tr>
+</table>
 
 ## License
 
