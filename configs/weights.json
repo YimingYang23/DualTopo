@@ -1,0 +1,8 @@
+{
+  "repo_id": "y352184741/DualTopo",
+  "filename": "dualtopo_remake_scale025_subset_a.pth",
+  "sha256": "5393ca1974be702b3408f037e561fb0a87cfe148f1f563d1169cd0eae1a97ba5",
+  "bytes": 278536920,
+  "tensor_count": 1023,
+  "source_checkpoint_sha256": "da89433c07d3e1019d260b554b6febb577fc15b0ce805ebb0350d2d3de98d841"
+}
