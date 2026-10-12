@@ -29,4 +29,3 @@ The converter writes the pickle inside `data/OpenLane-V2`. You can use that file
 Each frame provides `segment_id`, `timestamp`, `pose.rotation`, `pose.translation`, and the seven-camera `sensor` dictionary containing `image_path`, intrinsic `K`, and extrinsic rotation/translation. Keep the official camera insertion order. Ego rotation is a 3×3 matrix and translation is an XYZ vector. Annotation targets and future ego poses are not consumed by the public inference loader.
 
 Scene frames must be contiguous and strictly ordered by timestamp. The loader rejects interleaved scenes or reversed timestamps. It assigns sequential sample indices and resets temporal memory at scene changes.
-
