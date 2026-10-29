@@ -30,6 +30,5 @@
   },
   "original_stage1_optimization_exit_receipts": null,
   "original_training_exit_receipts_complete": null,
-  "historical_exit_receipt_note": null,
-  "public_release_reproduction": "Independent GPU numerical parity on 24 real frames from three scenes per branch; no new complete-dataset GPU inference is claimed."
+  "historical_exit_receipt_note": null
 }
