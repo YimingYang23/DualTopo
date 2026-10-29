@@ -2,7 +2,7 @@
 
 <h1>DualTopo</h1>
 
-<h3>Spatio-Temporal Lane Segment Graph Generation with Dual Latent World Models and Parallel Query Supervision</h3>
+<p><strong>Spatio-Temporal Lane Segment Graph Generation with Dual Latent World Models and Parallel Query Supervision</strong></p>
 
 <p>
   <a href="https://yimingyang23.github.io/">Yiming Yang</a><sup>1</sup>&emsp;
@@ -24,62 +24,65 @@
 </p>
 
 <p>
-  <a href="https://www.cuhk.edu.cn/"><img src="assets/logos/cuhk_shenzhen.png" width="38%" alt="The Chinese University of Hong Kong, Shenzhen"></a>&ensp;
-  <a href="https://www.ntu.edu.sg/"><img src="assets/logos/ntu.png" width="28%" alt="Nanyang Technological University"></a>&ensp;
-  <a href="https://map.qq.com/"><img src="assets/logos/tencent_maps.png" width="24%" alt="Tencent Maps"></a>
+  <a href="https://www.cuhk.edu.cn/"><img src="assets/logos/cuhk_shenzhen.png" width="30%" alt="The Chinese University of Hong Kong, Shenzhen"></a>&ensp;
+  <a href="https://www.ntu.edu.sg/"><img src="assets/logos/ntu.png" width="22%" alt="Nanyang Technological University"></a>&ensp;
+  <a href="https://map.qq.com/"><img src="assets/logos/tencent_maps.png" width="20%" alt="Tencent Maps"></a>
 </p>
-
-<h4>
-  <a href="https://github.com/YimingYang23/DualTopo"><img src="https://img.shields.io/badge/GitHub-Inference%20Code-181717?logo=github" alt="Inference code"></a>
-  <a href="https://huggingface.co/y352184741/DualTopo"><img src="https://img.shields.io/badge/Hugging%20Face-Checkpoint-FFD21E?logo=huggingface" alt="Checkpoint"></a>
-  <a href="#projects"><img src="https://img.shields.io/badge/Docs-Installation-2ea44f" alt="Installation"></a>
-  <a href="LICENSE"><img src="https://img.shields.io/badge/License-Apache--2.0-blue" alt="License"></a>
-</h4>
-
-<img src="assets/framework.png" width="100%" alt="Overall framework of DualTopo">
 
 </div>
 
-## Projects
+## Overview
 
-Test code for two implementations and three checkpoints.
+DualTopo reconstructs lane geometry and connectivity from multi-view camera sequences. Query and BEV world models propagate temporal context, a shared dual-pathway decoder predicts from current and historical queries, and directed graph propagation carries lane connectivity across frames.
 
-| Project | Environment | Dataset / task | Weights |
-| --- | --- | --- | --- |
-| [DualTopo](projects/dualtopo/) | Python 3.11+, PyTorch 2.x | SubsetA lane segments, LaneSegNet format | [SubsetA](https://huggingface.co/y352184741/DualTopo/blob/main/dualtopo_remake_scale025_subset_a.pth) |
-| [RATopo](projects/ratopo/) | Python 3.8, PyTorch 1.9, MMCV 1.5.2 | SubsetA 3D centerlines | [SubsetA](https://huggingface.co/y352184741/DualTopo/tree/main/ratopo_subset_a) |
-| [RATopo](projects/ratopo/) | Same RATopo environment | SubsetB 2D centerlines | [SubsetB](https://huggingface.co/y352184741/DualTopo/tree/main/ratopo_subset_b) |
+![DualTopo framework](assets/framework.png)
 
-RATopo uses one project with `--subset A` or `--subset B`.
+## Model Zoo
 
-## Results (%)
+### DualTopo: SubsetA lane segments
 
-**DualTopo — SubsetA lane segments, 4,806 frames**
+[PyTorch implementation](projects/dualtopo/README.md) · [Checkpoint](https://huggingface.co/y352184741/DualTopo/blob/main/dualtopo_remake_scale025_subset_a.pth)
+
+Results on 4,806 validation frames (%).
 
 | Branch | mAP | AP_ls | AP_ped | TOP_lsls | mAP_type |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| init | 36.94 | 35.18 | 38.69 | 28.45 | 50.49 |
-| temporal | 40.47 | 39.53 | 41.42 | 32.11 | 53.85 |
+| Init | 36.94 | 35.18 | 38.69 | 28.45 | 50.49 |
+| Temporal | 40.47 | 39.53 | 41.42 | 32.11 | 53.85 |
 
-**RATopo — SubsetA/B centerlines, 4,806/6,019 frames**
+### RATopo: SubsetA / SubsetB centerlines
+
+[MMCV implementation](projects/ratopo/README.md) · [SubsetA checkpoint](https://huggingface.co/y352184741/DualTopo/tree/main/ratopo_subset_a) · [SubsetB checkpoint](https://huggingface.co/y352184741/DualTopo/tree/main/ratopo_subset_b)
+
+Results on 4,806 SubsetA and 6,019 SubsetB validation frames (%).
 
 | Subset | Branch | OLS | DET_l | DET_t | TOP_ll | TOP_lt |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| A | singleframe | 48.65 | 31.22 | 49.77 | 31.88 | 32.64 |
-| A | temporal | 50.14 | 33.48 | 49.77 | 34.71 | 34.08 |
-| B | singleframe | 53.65 | 39.56 | 56.73 | 42.82 | 27.93 |
-| B | temporal | 54.97 | 41.48 | 56.73 | 45.88 | 29.10 |
+| A | Single-frame | 48.65 | 31.22 | 49.77 | 31.88 | 32.64 |
+| A | Temporal | 50.14 | 33.48 | 49.77 | 34.71 | 34.08 |
+| B | Single-frame | 53.65 | 39.56 | 56.73 | 42.82 | 27.93 |
+| B | Temporal | 54.97 | 41.48 | 56.73 | 45.88 | 29.10 |
 
-SubsetA centerline scoring uses native bounding boxes for five polygonal traffic-element annotations.
+SubsetA centerline evaluation converts five polygonal traffic-element annotations to native bounding boxes. See the evaluation protocols for [SubsetA](projects/ratopo/backends/subset_a/results.json) and [SubsetB](projects/ratopo/backends/subset_b/results.json).
 
-## Installation and testing
+## Getting Started
 
-- **[DualTopo instructions](projects/dualtopo/README.md):** environment, LaneSegNet data preparation and testing.
-- **[RATopo instructions](projects/ratopo/README.md):** shared MMCV environment, SubsetA/B data and testing.
-- **[All weights on Hugging Face](https://huggingface.co/y352184741/DualTopo)**
+```bash
+git clone https://github.com/YimingYang23/DualTopo.git
+cd DualTopo
+```
 
-Each project provides `tools/reproduce.py` for weight download, inference and official evaluation.
+Choose the implementation for your task and install it in its own environment.
 
-## License
+| Project | Environment | Dataset / task |
+| --- | --- | --- |
+| [DualTopo](projects/dualtopo/README.md) | Python 3.11 · PyTorch 2.6 · Transformers | SubsetA lane segments, LaneSegNet format |
+| [RATopo](projects/ratopo/README.md) | Python 3.8 · PyTorch 1.9 · MMCV 1.5.2 | SubsetA 3D / SubsetB 2D centerlines |
 
-[Apache-2.0](LICENSE) · [Attribution](NOTICE) · [Previous release](https://github.com/YimingYang23/DualTopo/tree/legacy-layout-20261029)
+Each project README covers installation, data preparation and evaluation. Its `tools/reproduce.py` command downloads the weights, runs inference and computes official metrics.
+
+## Acknowledgements and License
+
+This project builds on [LaneSegNet](https://github.com/OpenDriveLab/LaneSegNet), [RATopo](https://github.com/buaa-colalab/RATopo) and [OpenLane-V2](https://github.com/OpenDriveLab/OpenLane-V2).
+
+[Apache-2.0 license](LICENSE) · [Third-party notices](NOTICE) · [Previous release](https://github.com/YimingYang23/DualTopo/tree/legacy-layout-20261029)
