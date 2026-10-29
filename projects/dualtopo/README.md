@@ -35,4 +35,13 @@ Runs 4,806 frames in the `init` and `temporal` pathways, followed by official la
 
 Both pathways update temporal memory. See [inference details](docs/inference.md) for branch semantics and individual commands in `tools/infer.py --help` and `tools/evaluate.py --help`.
 
+## Results (%)
+
+SubsetA lane segments, 4,806 frames.
+
+| Branch | mAP | AP_ls | AP_ped | TOP_lsls | mAP_type |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| init | 36.94 | 35.18 | 38.69 | 28.45 | 50.49 |
+| temporal | 40.47 | 39.53 | 41.42 | 32.11 | 53.85 |
+
 [License](LICENSE) · [Attribution](NOTICE)

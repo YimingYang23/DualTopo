@@ -54,6 +54,26 @@ Test code for two implementations and three checkpoints.
 
 RATopo uses one project with `--subset A` or `--subset B`.
 
+## Results (%)
+
+**DualTopo — SubsetA lane segments, 4,806 frames**
+
+| Branch | mAP | AP_ls | AP_ped | TOP_lsls | mAP_type |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| init | 36.94 | 35.18 | 38.69 | 28.45 | 50.49 |
+| temporal | 40.47 | 39.53 | 41.42 | 32.11 | 53.85 |
+
+**RATopo — SubsetA/B centerlines, 4,806/6,019 frames**
+
+| Subset | Branch | OLS | DET_l | DET_t | TOP_ll | TOP_lt |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| A | singleframe | 48.65 | 31.22 | 49.77 | 31.88 | 32.64 |
+| A | temporal | 50.14 | 33.48 | 49.77 | 34.71 | 34.08 |
+| B | singleframe | 53.65 | 39.56 | 56.73 | 42.82 | 27.93 |
+| B | temporal | 54.97 | 41.48 | 56.73 | 45.88 | 29.10 |
+
+SubsetA centerline scoring uses native bounding boxes for five polygonal traffic-element annotations.
+
 ## Installation and testing
 
 - **[DualTopo instructions](projects/dualtopo/README.md):** environment, LaneSegNet data preparation and testing.

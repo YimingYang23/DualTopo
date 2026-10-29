@@ -46,12 +46,12 @@ Individual tools: `download_weights.py`, `infer.py` and `evaluate.py`, all with 
 
 ## Results (%)
 
-| Subset / branch | OLS | DET_l | DET_t | TOP_ll | TOP_lt |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| A singleframe | 48.6484 | 31.2227 | 49.7748 | 31.8840 | 32.6385 |
-| A temporal | 50.1364 | 33.4838 | 49.7748 | 34.7070 | 34.0756 |
-| B singleframe | 53.6457 | 39.5619 | 56.7350 | 42.8199 | 27.9303 |
-| B temporal | 54.9715 | 41.4766 | 56.7350 | 45.8780 | 29.0965 |
+| Subset | Branch | OLS | DET_l | DET_t | TOP_ll | TOP_lt |
+| --- | --- | ---: | ---: | ---: | ---: | ---: |
+| A | singleframe | 48.65 | 31.22 | 49.77 | 31.88 | 32.64 |
+| A | temporal | 50.14 | 33.48 | 49.77 | 34.71 | 34.08 |
+| B | singleframe | 53.65 | 39.56 | 56.73 | 42.82 | 27.93 |
+| B | temporal | 54.97 | 41.48 | 56.73 | 45.88 | 29.10 |
 
 SubsetA scoring converts five polygonal traffic-element annotations to native bounding boxes. Results and protocol: [SubsetA](backends/subset_a/results.json) · [SubsetB](backends/subset_b/results.json).
 
