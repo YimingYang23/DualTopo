@@ -26,6 +26,17 @@ The converter writes the pickle inside `data/OpenLane-V2`. You can use that file
 
 ## Required inference metadata
 
-Each frame provides `segment_id`, `timestamp`, `pose.rotation`, `pose.translation`, and the seven-camera `sensor` dictionary containing `image_path`, intrinsic `K`, and extrinsic rotation/translation. Keep the official camera insertion order. Ego rotation is a 3×3 matrix and translation is an XYZ vector. Annotation targets and future ego poses are not consumed by the public inference loader.
+Each frame provides `segment_id`, `timestamp`, `pose.rotation`, `pose.translation`, and the seven-camera `sensor` dictionary containing `image_path`, intrinsic `K`, and extrinsic rotation/translation. Keep the official camera insertion order. Ego rotation is a 3×3 matrix and translation is an XYZ vector. Annotation targets and future ego poses are not consumed by the inference loader.
 
 Scene frames must be contiguous and strictly ordered by timestamp. The loader rejects interleaved scenes or reversed timestamps. It assigns sequential sample indices and resets temporal memory at scene changes.
+
+## Check the dataset
+
+From `DualTopo/projects/dualtopo`, verify the annotation format and image paths before evaluation:
+
+```bash
+python tools/check_data.py \
+  --annotations /path/to/data_dict_subset_A_val_lanesegnet.pkl \
+  --data-root /path/to/image_root \
+  --check-images
+```

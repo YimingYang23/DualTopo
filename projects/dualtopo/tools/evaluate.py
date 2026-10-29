@@ -7,7 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 sys.path[:0]=[str(ROOT),str(ROOT/'vendor/openlane')]
 import numpy as np
 from dualtopo.dataset import fix_pts_interpolate
-from openlanev2.lanesegment.evaluation import evaluate
+from dualtopo.evaluation import lanesegnet_evaluate as evaluate
 
 def sha(path):return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 def format_gt(infos,split='val'):
@@ -42,6 +42,6 @@ def main():
     for name,expected in spec['sources'].items():
         if sha(ROOT/name)!=expected:raise ValueError('Native evaluator/helper source checksum changed: '+name)
     metrics=evaluate(gt,pred)
-    result=dict(task='lane_segment',subset='A',frames=len(gt),metrics=metrics,prediction_sha256=sha(a.predictions),annotation_sha256=sha(a.annotations),evaluator_sha256=sha(inspect.getsourcefile(evaluate)),GT_protocol='Native LaneSegNet pedestrian-area formatting; centerline-task GT normalization is not applied; no frame removal',traffic_detector_in_checkpoint=False)
+    result=dict(task='lane_segment',subset='A',frames=len(gt),metrics=metrics,metric_protocol=spec['protocol'],evaluator_manifest_sha256=sha(ROOT/'evaluator.json'),prediction_sha256=sha(a.predictions),annotation_sha256=sha(a.annotations),evaluator_sha256=sha(inspect.getsourcefile(evaluate)),GT_protocol='Native LaneSegNet pedestrian-area formatting; centerline-task GT normalization is not applied; no frame removal',traffic_detector_in_checkpoint=False)
     out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2,default=encode,allow_nan=False));print(json.dumps(metrics,indent=2,default=encode,allow_nan=False))
 if __name__=='__main__':main()

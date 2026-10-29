@@ -1,36 +1,29 @@
 # Installation
 
-Use a separate Python environment with **PyTorch 2.6.0 + CUDA 12.4**, as shown below.
+Use Python 3.11 and a CUDA-enabled PyTorch 2.6.0 environment for GPU inference.
 
 ```bash
-conda create -n dualtopo python=3.11 -y
-conda activate dualtopo
+conda create -n dualtopo-pytorch python=3.11 -y
+conda activate dualtopo-pytorch
+
 git clone https://github.com/YimingYang23/DualTopo.git
 cd DualTopo/projects/dualtopo
 
-python -m pip install --upgrade pip
 python -m pip install torch==2.6.0 torchvision==0.21.0 \
   --index-url https://download.pytorch.org/whl/cu124
-python -m pip install -r requirements.txt
+python -m pip install -r requirements.txt -r requirements-eval.txt
 python -m pip install -e . --no-deps
 ```
 
-No MMCV, MMDetection, MMDetection3D, MMEngine or custom CUDA-extension compilation is required. Multi-scale deformable attention uses the PyTorch implementation provided by `transformers==4.57.3`. Install the CUDA wheel matching your NVIDIA driver; a separate locally compiled CUDA toolkit is not needed for these wheel-based operations.
+The CUDA 12.4 wheels require a compatible NVIDIA driver. Multi-scale deformable attention uses Transformers 4.57.3; this project runs directly in PyTorch.
 
-Check the environment:
-
-```bash
-python -c "import torch, torchvision, transformers, dualtopo; print(torch.__version__, torchvision.__version__, transformers.__version__); print(torch.cuda.is_available())"
-python tools/infer.py --help
-```
-
-For CPU-only compatibility work, replace the PyTorch installation command with:
+## Check the environment
 
 ```bash
-python -m pip install torch==2.6.0 torchvision==0.21.0 \
-  --index-url https://download.pytorch.org/whl/cpu
+python -c "import torch, torchvision, transformers, dualtopo; print(torch.__version__, torchvision.__version__, transformers.__version__); print('CUDA available:', torch.cuda.is_available())"
+python tools/reproduce.py --help
 ```
 
-Full sequential inference is intended for an NVIDIA GPU. CPU full-dataset inference is supported by the tensor operations but will be slow. Inference uses float32 and batch size 1. CUDA memory use depends on the padded camera-image sizes and device; this release does not assert a measured minimum VRAM for the polished entry point. If needed, set `PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True` before launching. Do not use mixed precision or `torch.compile` when comparing with the accepted FP32 run unless separately validated.
+`CUDA available` should be `True` for GPU inference. The standard evaluation uses FP32 and one frame per batch.
 
-The task-native OpenLane-V2 lane-segment evaluator is vendored in this project. Install `requirements-eval.txt` to use `tools/evaluate.py` or the complete `tools/reproduce.py` workflow. The upstream devkit is still used for dataset preparation. Keep the evaluator snapshot fixed when comparing results: upstream OpenLane-V2 v2.1.0 changed the TOP metric.
+Next: [prepare the dataset](data.md), then run [evaluation](../README.md#evaluation). Weights are downloaded automatically; see [manual download](weights.md) to use a local checkpoint.

@@ -18,6 +18,8 @@ python -m pip install -r requirements.txt -r requirements-eval.txt
 python -m pip install -e . --no-deps
 ```
 
+See [installation checks](docs/installation.md#check-the-environment) to confirm the environment.
+
 ## Dataset
 
 Prepare SubsetA with [LaneSegNet's data converter](https://github.com/OpenDriveLab/LaneSegNet#prepare-dataset):
@@ -39,7 +41,7 @@ python tools/reproduce.py \
 
 The command downloads the [SubsetA checkpoint](https://huggingface.co/y352184741/DualTopo/blob/main/dualtopo_remake_scale025_subset_a.pth), evaluates all 4,806 frames through the `init` and `temporal` pathways, and saves predictions and official metrics in `outputs/subset_a`.
 
-Use `--branches temporal` to evaluate the temporal pathway alone. Both pathways update temporal memory; `init` selects the initial-query predictions. See [inference details](docs/inference.md) for pathway semantics and `tools/infer.py --help` / `tools/evaluate.py --help` for individual commands.
+See [manual weight download](docs/weights.md) to use an existing local checkpoint. Use `--branches temporal` to evaluate the temporal pathway alone. Both pathways update temporal memory; `init` selects the initial-query predictions. See [inference details](docs/inference.md) for pathway semantics and `tools/infer.py --help` / `tools/evaluate.py --help` for individual commands.
 
 ## Results
 

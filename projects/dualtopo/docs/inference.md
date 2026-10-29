@@ -1,19 +1,42 @@
-# Inference semantics
+# Inference and evaluation
 
-## QWM, BWM and shared pathways
+Run these commands from `DualTopo/projects/dualtopo` after [installation](installation.md), [data preparation](data.md) and [weight download](weights.md).
 
-`DualTopo.forward_test` constructs current BEV features, predicts history-conditioned query and BEV latents, fuses BEV features and runs the shared Dual-Pathway Decoder. Relative ego rotation and translation form the 12-dimensional action latent used by QWM/BWM.
+## Complete evaluation
 
-The init pathway starts from current-frame queries. After the first decoder layer, the temporal pathway uses retained query history and current-frame candidates. Both pathways share learned layers and heads. `--branch init` selects init outputs, while the temporal memories continue to update from the temporal pathway. It is not a cold-start-per-frame ablation.
+```bash
+python tools/reproduce.py \
+  --data-root /path/to/image_root \
+  --annotations /path/to/data_dict_subset_A_val_lanesegnet.pkl \
+  --output-dir outputs/subset_a
+```
 
-Call `forward_test`, not `simple_test` directly: the entry handles `can_bus[:3]` and yaw increments according to the native BEV interface. With no previous BEV, these increments are zeroed. Full `lidar2global_rotation` and translation are retained for QWM/BWM; do not zero those poses. The released configuration preserves the accepted `video_test_mode` behavior rather than enabling a different upstream BEV history path.
+This evaluates all 4,806 validation frames through both pathways. The output directory contains `init.pkl`, `temporal.pkl` and their corresponding `*_metrics.json` files. Use `--branches temporal` to evaluate the temporal pathway alone.
 
-## Directed topology memory
+## Inference only
 
-The previous frame's adjacency is aligned with exactly the same ordered Top-K queries. `A[i,j]` represents a directed edge from i to j. Only lane-class nodes are valid; invalid edges and self-edges are excluded from propagation. Successor messages use row-normalized A and predecessor messages use row-normalized Aᵀ, with denominator floor `1e-6`.
+```bash
+python tools/infer.py \
+  --checkpoint weights/dualtopo_remake_scale025_subset_a.pth \
+  --data-root /path/to/image_root \
+  --annotations /path/to/data_dict_subset_A_val_lanesegnet.pkl \
+  --branch temporal \
+  --output outputs/subset_a/temporal.pkl
+```
 
-Cached query/BEV/adjacency tensors are detached. Scene changes clear the corresponding history. The raw learned adjacency is cached before output postprocessing.
+`--branch temporal` selects predictions from the history-conditioned pathway. `--branch init` selects initial-query predictions. Both pathways update temporal memory; scene changes reset history. Frames are processed in scene and timestamp order.
 
-## Prediction contract
+## Evaluate saved predictions
 
-The output has the LaneSegNet `results[(split, segment_id, timestamp)]['predictions']` structure. It contains `lane_segment`, `area`, `traffic_element`, `topology_lsls` and `topology_lste`. Traffic output is empty for this lane-only checkpoint. Use `python tools/evaluate.py` for the vendored task-native lane-segment evaluator. Its source snapshot is recorded in `evaluator.json`. The centerline scorer in the RATopo project uses a different prediction/GT schema.
+```bash
+python tools/evaluate.py \
+  --predictions outputs/subset_a/temporal.pkl \
+  --annotations /path/to/data_dict_subset_A_val_lanesegnet.pkl \
+  --output outputs/subset_a/temporal_metrics.json
+```
+
+The evaluator expects the complete 4,806-frame split and writes `mAP`, `AP_ls`, `AP_ped`, `TOP_lsls` and `mAP_type` to the specified JSON file.
+
+Prediction pickles use the LaneSegNet `results[(split, segment_id, timestamp)]['predictions']` format. Entries contain `lane_segment`, `area`, `traffic_element`, `topology_lsls` and `topology_lste`. Traffic-element predictions are empty for this lane-segment checkpoint.
+
+The metric file paths are listed in `reproduction.json`.

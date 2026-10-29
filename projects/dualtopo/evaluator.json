@@ -11,7 +11,17 @@
     "vendor/openlane/openlanev2/centerline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
     "vendor/openlane/openlanev2/centerline/io/__init__.py": "99e7fb3a6bff60720dc022dc8ed09010b15192902078f681a3d2b9c1195c9f71",
     "vendor/openlane/openlanev2/centerline/io/io.py": "e8b35038c517935ebe17e19fc77cc8b31e84439281988d6af4e7bb62bebe06c2",
-    "vendor/openlane/openlanev2/centerline/evaluation/distance.py": "c280011d4a4aeaf58cd5baf0e470db05dcac30f9fc930370ff2aecf083c4ae43"
+    "vendor/openlane/openlanev2/centerline/evaluation/distance.py": "c280011d4a4aeaf58cd5baf0e470db05dcac30f9fc930370ff2aecf083c4ae43",
+    "dualtopo/evaluation.py": "ed44bfb61fdc784e0a3093a4fbc099618665216200f6c167ef90b12ef98964ec"
   },
-  "initializer_adaptation": "Do not import the unused centerline/F-score evaluator or its legacy ORTools dependency. Lane-segment evaluator and all used distance formulas are unchanged."
+  "initializer_adaptation": "Do not import the unused centerline/F-score evaluator or its legacy ORTools dependency. Lane-segment evaluator and all used distance formulas are unchanged.",
+  "protocol": "LaneSegNet-five-v1",
+  "metrics": [
+    "mAP",
+    "AP_ls",
+    "AP_ped",
+    "TOP_lsls",
+    "mAP_type"
+  ],
+  "entrypoint": "dualtopo.evaluation.lanesegnet_evaluate"
 }
