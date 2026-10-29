@@ -1,0 +1,33 @@
+{
+  "accepted": true,
+  "checkpoint_export": {
+    "tensor_count": 2677,
+    "all_finite": true,
+    "exact_key_dtype_shape_and_values": true,
+    "source_sha256": "4adaf445a272806746e435c683ade935ee26331dd764573c6a5d29150117116e",
+    "release_sha256": "a67a529693b861d6693ccd148637f6661906d08a3342413ee44e162e83e3254e"
+  },
+  "numerical_parity": {
+    "frames_per_branch": 24,
+    "branches": [
+      "singleframe",
+      "temporal"
+    ],
+    "scenes": 3,
+    "actual_history_and_scene_reset": true,
+    "stats": {
+      "max_abs": 0.0,
+      "tensor_count": 48,
+      "array_count": 384,
+      "tensor_exact": true
+    },
+    "loaded_state_tensors": 2677
+  },
+  "input_tensor_and_metadata_exact": true,
+  "public_modules_loaded_from_project": true,
+  "original_complete_evaluation_accepted": true,
+  "full_dataset_GPU_reinference_in_public_release": false,
+  "GPU": "Tesla V100S-PCIE-32GB",
+  "precision": "FP32",
+  "dependency_environment": "Python 3.8.20; PyTorch 1.9.0+cu111; MMCV-full 1.5.2; MMDetection 2.26.0; MMDetection3D 1.0.0rc6"
+}

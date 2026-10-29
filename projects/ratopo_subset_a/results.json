@@ -1,0 +1,35 @@
+{
+  "model": "DualTopo (RATopo)",
+  "subset": "A",
+  "samples": 4806,
+  "scenes": 150,
+  "units": "percent",
+  "metrics": {
+    "singleframe": {
+      "OLS": 48.648381889759285,
+      "DET_l": 31.222662329673767,
+      "DET_t": 49.77476894855499,
+      "TOP_ll": 31.884022508111943,
+      "TOP_lt": 32.638548874626466
+    },
+    "temporal": {
+      "OLS": 50.13637452504353,
+      "DET_l": 33.48377048969269,
+      "DET_t": 49.77476894855499,
+      "TOP_ll": 34.70700077184348,
+      "TOP_lt": 34.07560162285594
+    }
+  },
+  "annotation_sha256": "7b113681228ef3039e2ad1e2ce2b0c216ada235546b9d63fcb84a27da99d510a",
+  "source_checkpoint_sha256": "4adaf445a272806746e435c683ade935ee26331dd764573c6a5d29150117116e",
+  "evaluation_accepted": true,
+  "GT_protocol": {
+    "traffic_elements": 17647,
+    "changed_traffic_elements": 5,
+    "description": "Only the five three-point traffic-element polygons are converted to their min/max enclosing two-point bbox in an evaluation GT copy. No frame/traffic element removal; original annotation and official evaluator unchanged."
+  },
+  "original_stage1_optimization_exit_receipts": null,
+  "original_training_exit_receipts_complete": null,
+  "historical_exit_receipt_note": null,
+  "public_release_reproduction": "Independent GPU numerical parity on 24 real frames from three scenes per branch; no new complete-dataset GPU inference is claimed."
+}

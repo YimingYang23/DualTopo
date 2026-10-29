@@ -1,0 +1,41 @@
+{
+  "model": "DualTopo (RATopo)",
+  "subset": "B",
+  "samples": 6019,
+  "scenes": 150,
+  "units": "percent",
+  "metrics": {
+    "singleframe": {
+      "OLS": 53.64571280960383,
+      "DET_l": 39.56190645694733,
+      "DET_t": 56.73496127128601,
+      "TOP_ll": 42.81988626498094,
+      "TOP_lt": 27.930250262690905
+    },
+    "temporal": {
+      "OLS": 54.97148151501305,
+      "DET_l": 41.47655963897705,
+      "DET_t": 56.73496127128601,
+      "TOP_ll": 45.877957272926366,
+      "TOP_lt": 29.096461708293365
+    }
+  },
+  "annotation_sha256": "6358379714dd0885b65c22f7811da4d31d3df93eabe8b8d6e8844867875361a9",
+  "source_checkpoint_sha256": "ee9a75dc2e7330a06a9e98deefac996d53d896553d7b37d6bb3c72037d18067a",
+  "evaluation_accepted": true,
+  "GT_protocol": {
+    "traffic_elements": 22916,
+    "changed_traffic_elements": 0,
+    "description": "Unmodified SubsetB GT; all traffic-element boxes have two points."
+  },
+  "original_stage1_optimization_exit_receipts": [
+    null,
+    null,
+    null,
+    null
+  ],
+  "original_training_exit_receipts_complete": false,
+  "historical_exit_receipt_note": "SubsetB original Stage1 exit receipts were not recoverable; later CPU finalization checks are not the original optimization waits.",
+  "public_release_reproduction": "Independent GPU numerical parity on 24 real frames from three scenes per branch; no new complete-dataset GPU inference is claimed.",
+  "overall_contract_fully_satisfied": false
+}

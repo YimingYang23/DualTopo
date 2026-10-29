@@ -1,0 +1,11 @@
+DualTopo on RATopo, Subset B
+
+RATopo native components: Han Li et al., RATopo: Improving Lane Topology Reasoning via Redundancy Assignment, ACM MM 2025.
+https://github.com/buaa-colalab/RATopo (Apache-2.0).
+BEVFormer and OpenMMLab components retain their original source copyright notices.
+BWM/GRU and point-attention components derive from LaneSegNet/TopoStreamer-family implementations.
+https://github.com/OpenDriveLab/LaneSegNet (Apache-2.0).
+OpenLane-V2 evaluator is redistributed with its source notices; dataset images and annotations are not redistributed.
+https://github.com/OpenDriveLab/OpenLane-V2
+
+Local adaptations: standalone inference assembly, explicit branch/history management, strict safe weight loading, subset configuration, source verification and evaluation command wrappers. Runtime helpers are extracted from the validated DualTopo implementation; native/donor/evaluator source notices are retained.

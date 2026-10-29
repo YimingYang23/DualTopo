@@ -1,0 +1,10 @@
+{
+  "repo_id": "y352184741/DualTopo",
+  "filename": "ratopo_subset_a/model.safetensors",
+  "revision": "main",
+  "sha256": "a67a529693b861d6693ccd148637f6661906d08a3342413ee44e162e83e3254e",
+  "bytes": 1049708112,
+  "tensor_count": 2677,
+  "source_checkpoint_sha256": "4adaf445a272806746e435c683ade935ee26331dd764573c6a5d29150117116e",
+  "format": "safetensors; model tensors only; no optimizer, scheduler, runtime objects or private paths"
+}
