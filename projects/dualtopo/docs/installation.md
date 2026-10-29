@@ -15,7 +15,7 @@ python -m pip install -r requirements.txt -r requirements-eval.txt
 python -m pip install -e . --no-deps
 ```
 
-The CUDA 12.4 wheels require a compatible NVIDIA driver. Multi-scale deformable attention uses Transformers 4.57.3; this project runs directly in PyTorch.
+The CUDA 12.4 wheels require a compatible NVIDIA driver. The remaining packages, including Transformers 4.57.3, are installed from the requirements files.
 
 ## Check the environment
 

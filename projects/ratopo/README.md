@@ -25,10 +25,10 @@ Use a CUDA toolkit/compiler compatible with PyTorch 1.9 and CUDA 11.1.
 
 Follow [RATopo's dataset preparation](https://github.com/buaa-colalab/RATopo#prepare-dataset). Set `--data-root` to the image root referenced by the annotations.
 
-| Subset | Annotation file | Geometry | Frames |
-| --- | --- | --- | ---: |
-| A | `data_dict_subset_A_val.pkl` | Seven cameras, 11-point XYZ centerlines | 4,806 |
-| B | `data_dict_subset_B_val.pkl` | Six cameras, 11-point XY centerlines | 6,019 |
+| Subset | Annotation file | Frames |
+| --- | --- | ---: |
+| A | `data_dict_subset_A_val.pkl` | 4,806 |
+| B | `data_dict_subset_B_val.pkl` | 6,019 |
 
 Configs: [SubsetA](configs/subset_a.py) · [SubsetB](configs/subset_b.py).
 
@@ -54,7 +54,7 @@ python tools/reproduce.py --subset B \
 
 Each command downloads the matching checkpoint ([SubsetA](https://huggingface.co/y352184741/DualTopo/tree/main/ratopo_subset_a) / [SubsetB](https://huggingface.co/y352184741/DualTopo/tree/main/ratopo_subset_b)), evaluates `singleframe` and `temporal` over the full validation split, and saves predictions and official metrics in the output directory.
 
-Use `--branches temporal` to evaluate the temporal branch alone. `singleframe` resets history each frame; `temporal` carries history within each scene.
+Use `--branches temporal` or `--branches singleframe` to evaluate one branch.
 
 Individual commands are available in `tools/download_weights.py`, `tools/infer.py` and `tools/evaluate.py`. Each accepts `--subset A/B`; run it with `--subset A --help` for options.
 

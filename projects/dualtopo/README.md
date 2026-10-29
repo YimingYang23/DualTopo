@@ -26,7 +26,6 @@ Prepare SubsetA with [LaneSegNet's data converter](https://github.com/OpenDriveL
 
 - **Annotations:** `data_dict_subset_A_val_lanesegnet.pkl` (4,806 frames).
 - **Images:** seven cameras per frame; set `--data-root` to the image root referenced by the annotations.
-- **Geometry:** 10 XYZ points for each center, left and right line.
 
 See [data preparation](docs/data.md) for image paths and conversion details.
 
@@ -41,7 +40,7 @@ python tools/reproduce.py \
 
 The command downloads the [SubsetA checkpoint](https://huggingface.co/y352184741/DualTopo/blob/main/dualtopo_remake_scale025_subset_a.pth), evaluates all 4,806 frames through the `init` and `temporal` pathways, and saves predictions and official metrics in `outputs/subset_a`.
 
-See [manual weight download](docs/weights.md) to use an existing local checkpoint. Use `--branches temporal` to evaluate the temporal pathway alone. Both pathways update temporal memory; `init` selects the initial-query predictions. See [inference details](docs/inference.md) for pathway semantics and `tools/infer.py --help` / `tools/evaluate.py --help` for individual commands.
+Use `--branches temporal` or `--branches init` to evaluate one branch. See [manual weight download](docs/weights.md) to use a local checkpoint, or [individual inference and scoring commands](docs/inference.md) to run each step separately.
 
 ## Results
 

@@ -1,8 +1,8 @@
-# Inference and evaluation
+# Run inference and evaluation
 
-Run these commands from `DualTopo/projects/dualtopo` after [installation](installation.md), [data preparation](data.md) and [weight download](weights.md).
+First complete [installation](installation.md) and [data preparation](data.md). Run the following commands from `DualTopo/projects/dualtopo`.
 
-## Complete evaluation
+## Evaluate the dataset
 
 ```bash
 python tools/reproduce.py \
@@ -11,9 +11,13 @@ python tools/reproduce.py \
   --output-dir outputs/subset_a
 ```
 
-This evaluates all 4,806 validation frames through both pathways. The output directory contains `init.pkl`, `temporal.pkl` and their corresponding `*_metrics.json` files. Use `--branches temporal` to evaluate the temporal pathway alone.
+This downloads the weights and evaluates the 4,806 validation frames for `init` and `temporal`. Add `--branches temporal` to run only `temporal`, or `--branches init` to run only `init`.
 
-## Inference only
+Predictions are saved as `init.pkl` and `temporal.pkl`. Metrics are saved as JSON files in the output directory; their paths are listed in `reproduction.json`.
+
+## Generate predictions only
+
+Download the weights with the [weight download command](weights.md), then run:
 
 ```bash
 python tools/infer.py \
@@ -24,9 +28,9 @@ python tools/infer.py \
   --output outputs/subset_a/temporal.pkl
 ```
 
-`--branch temporal` selects predictions from the history-conditioned pathway. `--branch init` selects initial-query predictions. Both pathways update temporal memory; scene changes reset history. Frames are processed in scene and timestamp order.
+`--branch` accepts `init` or `temporal`. Use `--device cuda:1` to select another GPU.
 
-## Evaluate saved predictions
+## Score a prediction file
 
 ```bash
 python tools/evaluate.py \
@@ -35,8 +39,4 @@ python tools/evaluate.py \
   --output outputs/subset_a/temporal_metrics.json
 ```
 
-The evaluator expects the complete 4,806-frame split and writes `mAP`, `AP_ls`, `AP_ped`, `TOP_lsls` and `mAP_type` to the specified JSON file.
-
-Prediction pickles use the LaneSegNet `results[(split, segment_id, timestamp)]['predictions']` format. Entries contain `lane_segment`, `area`, `traffic_element`, `topology_lsls` and `topology_lste`. Traffic-element predictions are empty for this lane-segment checkpoint.
-
-The metric file paths are listed in `reproduction.json`.
+The prediction file must cover all 4,806 validation frames. The output JSON contains `mAP`, `AP_ls`, `AP_ped`, `TOP_lsls` and `mAP_type`.

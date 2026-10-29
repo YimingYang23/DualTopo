@@ -33,7 +33,7 @@
 
 ## Overview
 
-DualTopo reconstructs lane geometry and connectivity from multi-view camera sequences. Query and BEV world models propagate temporal context, a shared dual-pathway decoder predicts from current and historical queries, and directed graph propagation carries lane connectivity across frames.
+DualTopo reconstructs lane geometry and connectivity from multi-view camera sequences. This repository provides inference code, pretrained weights and evaluation commands for lane-segment and centerline tasks on OpenLane-V2.
 
 ![DualTopo framework](assets/framework.png)
 
