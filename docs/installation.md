@@ -1,3 +1,5 @@
+> Legacy PyTorch DualTopo documentation. Current project: [projects/dualtopo](../projects/dualtopo/). The separate MMCV RATopo project is [projects/ratopo](../projects/ratopo/).
+
 # Installation
 
 Use a separate Python environment with **PyTorch 2.6.0 + CUDA 12.4**, as shown below.

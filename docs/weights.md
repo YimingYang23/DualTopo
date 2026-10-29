@@ -1,3 +1,5 @@
+> Legacy PyTorch DualTopo documentation. Current project: [projects/dualtopo](../projects/dualtopo/). The separate MMCV RATopo project is [projects/ratopo](../projects/ratopo/).
+
 # SubsetA checkpoint distribution
 
 The official target is [y352184741/DualTopo](https://huggingface.co/y352184741/DualTopo). The prepared file is `dualtopo_remake_scale025_subset_a.pth`; its bytes and SHA256 are listed in `configs/weights.json`. It contains only `state_dict` tensors and portable `metadata`, and is loadable with `torch.load(..., weights_only=True)`.

@@ -1,3 +1,5 @@
+> Legacy PyTorch DualTopo documentation. Current project: [projects/dualtopo](../projects/dualtopo/). The separate MMCV RATopo project is [projects/ratopo](../projects/ratopo/).
+
 # Release compatibility validation
 
 The release was compared with the original implementation, using the final SubsetA checkpoint at epoch 12 / iteration 33516.

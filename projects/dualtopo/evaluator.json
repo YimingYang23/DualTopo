@@ -1,0 +1,17 @@
+{
+  "task": "lane_segment",
+  "sources": {
+    "vendor/openlane/openlanev2/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/openlane/openlanev2/utils.py": "271b67d5212c2ab9801b1e71ca788638f5a25760e8aaf6b2905ab66adc0f8142",
+    "vendor/openlane/openlanev2/lanesegment/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/openlane/openlanev2/lanesegment/evaluation/__init__.py": "36c7848c95a32de34a58f97b8c71ca28f106abfec8d6aeaba71a010313d99e9e",
+    "vendor/openlane/openlanev2/lanesegment/evaluation/evaluate.py": "214918bcb26db69ed25664922d6e62d59cb522cffbe73b8ccb8609ad02ca5c7e",
+    "vendor/openlane/openlanev2/lanesegment/evaluation/distance.py": "14e1d80f175bd26b74bb7029ffb4d6771990047c0c99620427d94d8e89731bce",
+    "vendor/openlane/openlanev2/lanesegment/io/__init__.py": "280496d7bc7a1b8bcca8986224da6963ce3edb50da57678e06f15d1311812e1c",
+    "vendor/openlane/openlanev2/centerline/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "vendor/openlane/openlanev2/centerline/io/__init__.py": "99e7fb3a6bff60720dc022dc8ed09010b15192902078f681a3d2b9c1195c9f71",
+    "vendor/openlane/openlanev2/centerline/io/io.py": "e8b35038c517935ebe17e19fc77cc8b31e84439281988d6af4e7bb62bebe06c2",
+    "vendor/openlane/openlanev2/centerline/evaluation/distance.py": "c280011d4a4aeaf58cd5baf0e470db05dcac30f9fc930370ff2aecf083c4ae43"
+  },
+  "initializer_adaptation": "Do not import the unused centerline/F-score evaluator or its legacy ORTools dependency. Lane-segment evaluator and all used distance formulas are unchanged."
+}

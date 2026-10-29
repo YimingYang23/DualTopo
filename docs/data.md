@@ -1,3 +1,5 @@
+> Legacy PyTorch DualTopo documentation. Current project: [projects/dualtopo](../projects/dualtopo/). The separate MMCV RATopo project is [projects/ratopo](../projects/ratopo/).
+
 # OpenLane-V2 SubsetA data
 
 Obtain the images and lane-segment annotations through [OpenLane-V2](https://github.com/OpenDriveLab/OpenLane-V2). Use [LaneSegNet's preparation instructions](https://github.com/OpenDriveLab/LaneSegNet#prepare-dataset) and its official [tools/data_process.py](https://github.com/OpenDriveLab/LaneSegNet/blob/main/tools/data_process.py) to generate `data_dict_subset_A_val_lanesegnet.pkl`.

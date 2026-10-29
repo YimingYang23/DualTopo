@@ -1,0 +1,21 @@
+DualTopo SubsetA inference release
+
+Portions of the lane-segment representation, preprocessing, decoding and
+attention implementation derive from LaneSegNet by OpenDriveLab.
+Copyright (c) OpenDriveLab. All rights reserved.
+https://github.com/OpenDriveLab/LaneSegNet
+Licensed under the Apache License, Version 2.0; see LICENSE.
+
+The BEVFormer-based streaming layers have been adapted into the standalone
+PyTorch Remake implementation. This release further removes training entry
+points, loss and assignment code, and renames public components to the
+DualTopo paper terminology. Learned tensor values are preserved.
+
+Deformable attention calls the separately installed Hugging Face
+Transformers implementation. Torchvision supplies ResNet-50 and image
+rotation operations. Their packages retain their own license notices.
+
+OpenLane-V2 images and annotations are not distributed here and remain
+subject to the dataset's own terms.
+
+The vendored OpenLane-V2 lane-segment evaluator and distance/io helpers retain the OpenLane-V2 Authors' Apache-2.0 notices. Only the centerline package initializer is adapted to avoid importing an unused centerline scorer.

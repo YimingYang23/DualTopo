@@ -1,0 +1,8 @@
+__pycache__/
+*.py[cod]
+weights/
+outputs/
+data/
+*.safetensors
+*.pth
+*.pkl

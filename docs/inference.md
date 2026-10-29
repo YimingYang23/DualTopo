@@ -1,3 +1,5 @@
+> Legacy PyTorch DualTopo documentation. Current project: [projects/dualtopo](../projects/dualtopo/). The separate MMCV RATopo project is [projects/ratopo](../projects/ratopo/).
+
 # Inference semantics
 
 ## QWM, BWM and shared pathways

@@ -1,0 +1,15 @@
+{
+  "task": "lane_segment",
+  "subset": "A",
+  "frames": 4806,
+  "cameras": 7,
+  "annotation_filename": "data_dict_subset_A_val_lanesegnet.pkl",
+  "reference_annotation_sha256": "3b5206b044722a159e76bb251a37d3fe0f3827cc7ff74cc7144a27a1599d59d5",
+  "line_points": 10,
+  "line_dimensions": 3,
+  "traffic_detector_in_checkpoint": false,
+  "branch_semantics": {
+    "init": "Initialization pathway; temporal memories still update",
+    "temporal": "History-conditioned temporal pathway"
+  }
+}

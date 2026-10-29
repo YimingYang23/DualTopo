@@ -1,0 +1,65 @@
+{
+  "accepted": true,
+  "parameter_tensor_exact": true,
+  "checkpoint_safe_load": true,
+  "cpu_fixture_checks": [
+    "first_frame",
+    "history_frame_QWM_BWM_directed_graph",
+    "native_formatter_exact"
+  ],
+  "fixture_grid": [
+    8,
+    16
+  ],
+  "release_grid": [
+    100,
+    200
+  ],
+  "full_dataset_rerun": false,
+  "torch_version": "2.10.0+cpu",
+  "manifest": {
+    "repo_id": "y352184741/DualTopo",
+    "filename": "dualtopo_remake_scale025_subset_a.pth",
+    "sha256": "5393ca1974be702b3408f037e561fb0a87cfe148f1f563d1169cd0eae1a97ba5",
+    "bytes": 278536920,
+    "tensor_count": 1023,
+    "source_checkpoint_sha256": "da89433c07d3e1019d260b554b6febb577fc15b0ce805ebb0350d2d3de98d841"
+  },
+  "end_to_end_cpu_fixture": [
+    "first_frame",
+    "history_frame",
+    "scene_reset"
+  ],
+  "project_relocation": {
+    "accepted": true,
+    "math_source_preserved": true,
+    "end_to_end_cpu_fixture": [
+      "first_frame",
+      "history_frame",
+      "scene_reset"
+    ],
+    "full_dataset_rerun": false
+  },
+  "native_lane_segment_evaluation_fixture": {
+    "accepted": true,
+    "native_GT_formatter_exact_frames": 20,
+    "native_evaluator_smoke_frames": 1,
+    "metrics": {
+      "OpenLane-V2 UniScore": {
+        "DET_l": 1.0,
+        "DET_a": 1.0,
+        "DET_t": 1.0,
+        "TOP_ll": 1.0,
+        "TOP_lt": 0.0,
+        "score": 0.800000011920929
+      }
+    },
+    "full_dataset_benchmark": false,
+    "dependency_versions": {
+      "numpy": "2.1.3",
+      "scipy": "1.15.3",
+      "shapely": "2.1.2",
+      "similaritymeasures": "1.5.0"
+    }
+  }
+}

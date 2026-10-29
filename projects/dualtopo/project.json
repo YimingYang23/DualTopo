@@ -1,0 +1,7 @@
+{
+  "implementation": "pytorch",
+  "task": "lane_segment",
+  "subsets": [
+    "A"
+  ]
+}
