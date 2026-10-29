@@ -69,6 +69,6 @@ Validation results (%).
 | B | Single-frame | 53.65 | 39.56 | 56.73 | 42.82 | 27.93 |
 | B | Temporal | 54.97 | 41.48 | 56.73 | 45.88 | 29.10 |
 
-SubsetA scoring converts five polygonal traffic-element annotations to native bounding boxes. Results and evaluation protocols: [SubsetA](backends/subset_a/results.json) · [SubsetB](backends/subset_b/results.json).
+Results and evaluation protocols: [SubsetA](backends/subset_a/results.json) · [SubsetB](backends/subset_b/results.json).
 
 [License](LICENSE) · [Attribution](NOTICE)
