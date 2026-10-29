@@ -1,0 +1,9 @@
+{
+  "A": {
+    "url": "https://huggingface.co/y352184741/DualTopo/resolve/main/ratopo_subset_a/annotations/validation.pkl",
+    "sha256": "7b113681228ef3039e2ad1e2ce2b0c216ada235546b9d63fcb84a27da99d510a",
+    "bytes": 48976278,
+    "frames": 4806,
+    "license": "CC-BY-NC-SA-4.0"
+  }
+}

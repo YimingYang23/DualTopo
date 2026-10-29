@@ -35,8 +35,6 @@
 
 DualTopo reconstructs lane geometry and connectivity from multi-view camera sequences. This repository provides inference code, pretrained weights and evaluation commands for lane-segment and centerline tasks on OpenLane-V2.
 
-![DualTopo framework](assets/framework.png)
-
 ## Model Zoo
 
 ### DualTopo: SubsetA lane segments
@@ -85,4 +83,4 @@ Each project README covers installation, data preparation and evaluation. Its `t
 
 This project builds on [LaneSegNet](https://github.com/OpenDriveLab/LaneSegNet), [RATopo](https://github.com/buaa-colalab/RATopo) and [OpenLane-V2](https://github.com/OpenDriveLab/OpenLane-V2).
 
-[Apache-2.0 license](LICENSE) · [Third-party notices](NOTICE) · [Previous release](https://github.com/YimingYang23/DualTopo/tree/legacy-layout-20261029)
+[Apache-2.0 license](LICENSE) · [Third-party notices](NOTICE)

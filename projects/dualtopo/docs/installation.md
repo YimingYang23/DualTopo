@@ -1,6 +1,6 @@
 # Installation
 
-Use Python 3.11 and a CUDA-enabled PyTorch 2.6.0 environment for GPU inference.
+Use Linux and an NVIDIA driver compatible with the PyTorch CUDA 12.4 wheels.
 
 ```bash
 conda create -n dualtopo-pytorch python=3.11 -y
@@ -9,21 +9,21 @@ conda activate dualtopo-pytorch
 git clone https://github.com/YimingYang23/DualTopo.git
 cd DualTopo/projects/dualtopo
 
+python -m pip install --upgrade pip setuptools wheel
 python -m pip install torch==2.6.0 torchvision==0.21.0 \
-  --index-url https://download.pytorch.org/whl/cu124
+  --index-url https://download.pytorch.org/whl/cu124 \
+  --extra-index-url https://pypi.org/simple
 python -m pip install -r requirements.txt -r requirements-eval.txt
 python -m pip install -e . --no-deps
 ```
 
-The CUDA 12.4 wheels require a compatible NVIDIA driver. The remaining packages, including Transformers 4.57.3, are installed from the requirements files.
-
 ## Check the environment
 
 ```bash
+python -m pip check
 python -c "import torch, torchvision, transformers, dualtopo; print(torch.__version__, torchvision.__version__, transformers.__version__); print('CUDA available:', torch.cuda.is_available())"
-python tools/reproduce.py --help
 ```
 
-`CUDA available` should be `True` for GPU inference. The standard evaluation uses FP32 and one frame per batch.
+`CUDA available` should be `True`. Inference uses FP32 and one frame per batch.
 
-Next: [prepare the dataset](data.md), then run [evaluation](../README.md#evaluation). Weights are downloaded automatically; see [manual download](weights.md) to use a local checkpoint.
+Next: [prepare data](data.md), then [run evaluation](inference.md).

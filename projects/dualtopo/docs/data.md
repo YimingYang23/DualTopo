@@ -1,42 +1,45 @@
 # Prepare SubsetA data
 
-## Download and convert
+## Download
 
-Download the dataset from [OpenLane-V2](https://github.com/OpenDriveLab/OpenLane-V2), then follow [LaneSegNet's data preparation instructions](https://github.com/OpenDriveLab/LaneSegNet#prepare-dataset) to generate `data_dict_subset_A_val_lanesegnet.pkl`.
-
-In the LaneSegNet checkout, point `data/OpenLane-V2` at the downloaded dataset and run:
-
-```bash
-python tools/data_process.py
-```
-
-The validation files should be arranged as follows:
+Download [OpenLane-V2 SubsetA](https://github.com/OpenDriveLab/OpenLane-V2/blob/master/data/README.md#download). Use the **Map Element Bucket info** and **Image (val)** downloads for SubsetA, plus the split index. Extract them into:
 
 ```text
-data/OpenLane-V2/
-├── data_dict_subset_A_val_lanesegnet.pkl
+OpenLane-V2/
+├── data_dict_subset_A.json
 └── val/
-    └── ...
+    └── <segment_id>/
+        ├── info/<timestamp>-ls.json
+        └── ... camera images ...
 ```
 
-## Set the input paths
+## Convert annotations
 
-Pass the generated pickle file to `--annotations`. Choose `--data-root` according to the image paths stored in that file:
+From `DualTopo/projects/dualtopo`:
 
-| Image path in the annotations | `--data-root` |
+```bash
+python tools/prepare_data.py \
+  --data-root /path/to/OpenLane-V2 \
+  --output data/data_dict_subset_A_val_lanesegnet.pkl
+```
+
+The converter prepares the 4,806 validation frames in LaneSegNet format. To use an index stored elsewhere, add `--index /path/to/data_dict_subset_A.json`.
+
+## Set the image root
+
+The converter's `--data-root` is the dataset directory above. For inference, choose `--data-root` according to `sensor[...]['image_path']` in the generated pickle:
+
+| Image path in the pickle | Inference `--data-root` |
 | --- | --- |
-| `OpenLane-V2/val/...` | `/path/to/data` |
-| `val/...` | `/path/to/data/OpenLane-V2` |
+| `OpenLane-V2/val/...` | `/path/to` |
+| `val/...` | `/path/to/OpenLane-V2` |
 
-## Check the files
-
-From `DualTopo/projects/dualtopo`, run:
+Check the complete image set:
 
 ```bash
 python tools/check_data.py \
-  --annotations /path/to/data_dict_subset_A_val_lanesegnet.pkl \
-  --data-root /path/to/image_root \
-  --check-images
+  --annotations data/data_dict_subset_A_val_lanesegnet.pkl \
+  --data-root /path/to/image_root --check-images
 ```
 
-After the check succeeds, proceed to [inference and evaluation](inference.md).
+Next: [run evaluation](inference.md).

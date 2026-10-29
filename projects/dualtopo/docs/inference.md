@@ -2,6 +2,17 @@
 
 First complete [installation](installation.md) and [data preparation](data.md). Run the following commands from `DualTopo/projects/dualtopo`.
 
+## Check the setup
+
+```bash
+python tools/reproduce.py \
+  --data-root /path/to/image_root \
+  --annotations /path/to/data_dict_subset_A_val_lanesegnet.pkl \
+  --limit 3 --output-dir outputs/check_subset_a
+```
+
+This runs inference and scoring on three frames for both branches.
+
 ## Evaluate the dataset
 
 ```bash
@@ -39,4 +50,4 @@ python tools/evaluate.py \
   --output outputs/subset_a/temporal_metrics.json
 ```
 
-The prediction file must cover all 4,806 validation frames. The output JSON contains `mAP`, `AP_ls`, `AP_ped`, `TOP_lsls` and `mAP_type`.
+The prediction file must cover all 4,806 validation frames. Metric values are percentages. The output JSON contains `mAP`, `AP_ls`, `AP_ped`, `TOP_lsls` and `mAP_type`.

@@ -35,6 +35,7 @@ def main():
     parser.add_argument('--output', required=True)
     parser.add_argument('--branch', choices=['singleframe', 'temporal'], default='temporal')
     parser.add_argument('--device', default='cuda:0')
+    parser.add_argument('--limit', type=int, help='Run the first N validation frames')
     parser.add_argument('--allow-annotation-mismatch', action='store_true')
     args = parser.parse_args()
     output = Path(args.output)
@@ -49,22 +50,25 @@ def main():
     torch.backends.cuda.matmul.allow_tf32 = False
     model = build_model(args.weights, args.device)
     dataset = build_dataset(args.data_root, args.annotations, args.allow_annotation_mismatch)
+    if args.limit is not None and not 1 <= args.limit <= len(dataset):
+        parser.error('--limit exceeds the validation split')
+    count = args.limit or len(dataset)
     results, previous_scene, previous_index = [], None, None
     start = time.time()
     with inference_session(model, args.branch):
-        for index in range(len(dataset)):
+        for index in range(count):
             data = prepare(dataset, index, args.device)
             bev, prediction, trace = predict(model, data, args.branch)
             scene = data['img_metas'][0]['scene_token']
             expected_history = args.branch == 'temporal' and scene == previous_scene and index == previous_index + 1
-            if trace['has_history'] != [expected_history] or not finite(prediction) or not finite(bev):
+            if list(trace['has_history']) != [expected_history] or not finite(prediction) or not finite(bev):
                 raise ValueError('Non-finite inference or invalid chronological history')
             results.append(prediction[0])
             previous_scene, previous_index = scene, index
             if index < 3 or (index + 1) % 100 == 0:
                 print(json.dumps(dict(index=index, samples=index + 1, branch=args.branch, has_history=trace['has_history'])), flush=True)
     formatted = dataset.format_results(results)
-    if len(formatted['results']) != len(dataset) or not finite(formatted):
+    if len(formatted['results']) != count or not finite(formatted):
         raise ValueError('Incomplete or non-finite native prediction formatting')
     temporary = output.with_suffix(output.suffix + '.partial')
     with temporary.open('wb') as stream:
@@ -72,7 +76,7 @@ def main():
         stream.flush()
         os.fsync(stream.fileno())
     temporary.replace(output)
-    receipt = dict(samples=len(dataset), indices=list(range(len(dataset))), branch=args.branch,
+    receipt = dict(samples=count, full_validation_split=count==len(dataset), indices=list(range(count)), branch=args.branch,
                    predictions_sha256=sha256(output), checkpoint_sha256=sha256(args.weights), annotation_sha256=sha256(args.annotations),
                    finite=True, elapsed_seconds=time.time() - start)
     output.with_suffix(output.suffix + '.json').write_text(json.dumps(receipt, indent=2))

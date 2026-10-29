@@ -29,12 +29,15 @@ def encode(x):
     if isinstance(x,np.generic):return x.item()
     raise TypeError(type(x).__name__)
 def main():
-    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--predictions',required=True);p.add_argument('--annotations',required=True);p.add_argument('--output',required=True);p.add_argument('--split',default='val')
-    a=p.parse_args();out=Path(a.output)
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--predictions',required=True);p.add_argument('--annotations',required=True);p.add_argument('--output',required=True);p.add_argument('--split',default='val');p.add_argument('--limit',type=int,help='Score the first N validation frames')
+    a=p.parse_args()
+    if a.limit is not None and not 1<=a.limit<=4806:p.error('--limit must be between 1 and 4806')
+    out=Path(a.output)
     if out.exists():raise FileExistsError('Choose a new metrics path')
     with Path(a.annotations).open('rb') as f:raw=pickle.load(f)
     infos=list(raw.values()) if isinstance(raw,dict) else list(raw)
     if len(infos)!=4806 or any('lane_segment' not in x['annotation'] for x in infos):raise ValueError('Requires all 4,806 native LaneSegNet-format SubsetA frames')
+    if a.limit is not None:infos=infos[:a.limit]
     with Path(a.predictions).open('rb') as f:pred=pickle.load(f)
     gt=format_gt(infos,a.split)
     if set(gt)!=set(pred['results']):raise ValueError('Predictions must cover the entire GT split exactly once')
@@ -42,6 +45,6 @@ def main():
     for name,expected in spec['sources'].items():
         if sha(ROOT/name)!=expected:raise ValueError('Native evaluator/helper source checksum changed: '+name)
     metrics=evaluate(gt,pred)
-    result=dict(task='lane_segment',subset='A',frames=len(gt),metrics=metrics,metric_protocol=spec['protocol'],evaluator_manifest_sha256=sha(ROOT/'evaluator.json'),prediction_sha256=sha(a.predictions),annotation_sha256=sha(a.annotations),evaluator_sha256=sha(inspect.getsourcefile(evaluate)),GT_protocol='Native LaneSegNet pedestrian-area formatting; centerline-task GT normalization is not applied; no frame removal',traffic_detector_in_checkpoint=False)
+    result=dict(task='lane_segment',subset='A',frames=len(gt),full_validation_split=len(gt)==4806,metrics=metrics,metric_protocol=spec['protocol'],evaluator_manifest_sha256=sha(ROOT/'evaluator.json'),prediction_sha256=sha(a.predictions),annotation_sha256=sha(a.annotations),evaluator_sha256=sha(inspect.getsourcefile(evaluate)),GT_protocol='Native LaneSegNet pedestrian-area formatting; centerline-task GT normalization is not applied; no frame removal',traffic_detector_in_checkpoint=False)
     out.parent.mkdir(parents=True,exist_ok=True);out.write_text(json.dumps(result,indent=2,default=encode,allow_nan=False));print(json.dumps(metrics,indent=2,default=encode,allow_nan=False))
 if __name__=='__main__':main()

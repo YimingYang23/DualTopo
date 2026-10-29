@@ -36,6 +36,7 @@ def main():
     parser.add_argument('--data-root', required=True)
     parser.add_argument('--output', required=True)
     parser.add_argument('--allow-annotation-mismatch', action='store_true')
+    parser.add_argument('--limit', type=int, help='Score the first N validation frames')
     args = parser.parse_args()
     output = Path(args.output)
     if output.exists():
@@ -47,9 +48,13 @@ def main():
     with Path(args.predictions).open('rb') as stream:
         # Only open prediction files produced by tools/infer.py or another trusted source.
         predictions = pickle.load(stream)
+    if args.limit is not None and not 1 <= args.limit <= len(dataset):
+        parser.error('--limit exceeds the validation split')
+    count = args.limit or len(dataset)
     ground_truth = copy.deepcopy(dataset.format_openlanev2_gt())
     expected = {(dataset.split, item['segment_id'], str(item['timestamp'])) for item in dataset.data_infos}
-    if set(ground_truth) != expected or set(predictions['results']) != expected:
+    selected = [(dataset.split, item['segment_id'], str(item['timestamp'])) for item in dataset.data_infos[:count]]
+    if set(ground_truth) != expected or set(predictions['results']) != set(selected):
         raise ValueError('Scoring requires every native frame exactly once')
     changes, traffic_elements = [], 0
     for token, frame in ground_truth.items():
@@ -74,9 +79,10 @@ def main():
     evaluator_expected = json.loads((ROOT / 'evaluator.json').read_text())
     if sha256(evaluator) != evaluator_expected['sha256']:
         raise ValueError('Official evaluator source differs from this release')
+    ground_truth = {token: ground_truth[token] for token in selected}
     metrics = evaluate(ground_truth, predictions)
     score = metrics['OpenLane-V2 Score']
-    record = dict(subset=protocol['subset'], samples=len(ground_truth), raw_metrics=metrics,
+    record = dict(subset=protocol['subset'], samples=len(ground_truth), full_validation_split=count==len(dataset), raw_metrics=metrics,
                   percent_metrics={name: 100 * score[key] for name, key in [('OLS', 'score'), ('DET_l', 'DET_l'), ('DET_t', 'DET_t'), ('TOP_ll', 'TOP_ll'), ('TOP_lt', 'TOP_lt')]},
                   prediction_sha256=sha256(args.predictions), annotation_sha256=sha256(args.annotations), evaluator_sha256=sha256(evaluator),
                   GT_preprocessing_sha256=sha256(preprocessing_path), CUDA_initialized=torch.cuda.is_initialized())
