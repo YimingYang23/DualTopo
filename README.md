@@ -1,3 +1,5 @@
+**Start here — two independent projects, three checkpoints:** [PyTorch DualTopo · SubsetA lane segments](projects/dualtopo/) | [MMCV RATopo · SubsetA / SubsetB centerlines](projects/ratopo/) | [All three weights](https://huggingface.co/y352184741/DualTopo)
+
 <div align="center">
 
 <h1>DualTopo</h1>
