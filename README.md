@@ -1,5 +1,3 @@
-**Test code:** [DualTopo](projects/dualtopo/) · [RATopo](projects/ratopo/) · [Weights](https://huggingface.co/y352184741/DualTopo)
-
 <div align="center">
 
 <h1>DualTopo</h1>
