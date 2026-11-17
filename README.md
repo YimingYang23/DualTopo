@@ -2,7 +2,7 @@
 
 <h1>DualTopo</h1>
 
-<p><strong>Spatio-Temporal Lane Segment Graph Generation with Dual Latent World Models and Parallel Query Supervision</strong></p>
+<p><strong>Spatio-Temporal Lane Graph Generation with Dual Latent World Models and Parallel Query Supervision</strong></p>
 
 <p>
   <a href="https://yimingyang23.github.io/">Yiming Yang</a><sup>1</sup>&emsp;
