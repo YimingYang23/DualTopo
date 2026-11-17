@@ -35,6 +35,22 @@
 
 DualTopo reconstructs lane geometry and connectivity from multi-view camera sequences. This repository provides inference code, pretrained weights and evaluation commands for lane-segment and centerline tasks on OpenLane-V2.
 
+<p align="center">
+  <img src="assets/media/framework.png" width="100%" alt="DualTopo framework: ego-motion-conditioned query and BEV world models with shared-weight parallel decoding">
+</p>
+
+## Demos
+
+Each clip shows surround-view camera footage, temporal lane tracks in the current ego frame, and the fused lane graph in a global BEV.
+
+<p align="center">
+  <img src="assets/media/demo-1.gif" width="100%" alt="DualTopo demo 1: temporal lane graph generation at a wide urban intersection">
+</p>
+
+<p align="center">
+  <img src="assets/media/demo-2.gif" width="100%" alt="DualTopo demo 2: temporal lane graph generation along a city street and intersection">
+</p>
+
 ## Model Zoo
 
 ### DualTopo: SubsetA lane segments
