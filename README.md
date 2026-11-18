@@ -5,6 +5,11 @@
 <p><strong>Spatio-Temporal Lane Graph Generation with Dual Latent World Models and Parallel Query Supervision</strong></p>
 
 <p>
+  <a href="https://arxiv.org/pdf/2507.23325"><img src="https://img.shields.io/badge/arXiv-Paper-B31B1B?logo=arxiv&amp;logoColor=white" alt="arXiv paper"></a>&ensp;
+  <a href="https://huggingface.co/y352184741/DualTopo/tree/main"><img src="https://img.shields.io/badge/Hugging%20Face-Weights-FFD21E?logo=huggingface&amp;logoColor=black" alt="Hugging Face model weights"></a>
+</p>
+
+<p>
   <a href="https://yimingyang23.github.io/">Yiming Yang</a><sup>1</sup>&emsp;
   <a href="https://scholar.google.com/citations?user=LqX1k5QAAAAJ&amp;hl=zh-CN&amp;oi=ao">Hongbin Lin</a><sup>1</sup>&emsp;
   <a href="https://scholar.google.com/citations?user=B588EyYAAAAJ&amp;hl=zh-CN&amp;oi=ao">Yueru Luo</a><sup>1</sup>&emsp;
